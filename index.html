@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>達文西密碼 - Da Vinci Code Online</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Lobby Screen -->
+        <div id="lobby-screen" class="screen active">
+            <div class="container">
+                <h1>達文西密碼 Da Vinci Code</h1>
+                <div class="lobby-content">
+                    <div class="player-info">
+                        <label for="player-name">玩家名稱：</label>
+                        <input type="text" id="player-name" placeholder="輸入你的名字" maxlength="20">
+                    </div>
+                    
+                    <div class="lobby-actions">
+                        <button id="create-room-btn" class="btn btn-primary">創建房間</button>
+                        <div class="join-room">
+                            <input type="text" id="room-id-input" placeholder="輸入房間 ID" maxlength="20">
+                            <button id="join-room-btn" class="btn btn-secondary">加入房間</button>
+                        </div>
+                    </div>
+
+                    <div id="connection-status" class="status-message"></div>
+                </div>
+
+                <div class="rules-section">
+                    <h3>遊戲規則</h3>
+                    <ul>
+                        <li>每位玩家有隱藏的數字牌（黑色和白色，數字 0-11）</li>
+                        <li>牌必須由小到大排列在玩家面前，但數字朝向自己</li>
+                        <li>輪流猜測對手的數字牌</li>
+                        <li>猜對了，該牌會被翻開；猜錯了，你自己的一張牌會被翻開</li>
+                        <li>最後還有未翻開牌的玩家獲勝</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Waiting Room Screen -->
+        <div id="waiting-screen" class="screen">
+            <div class="container">
+                <h2>等待房間</h2>
+                <div class="room-info">
+                    <p>房間 ID: <span id="current-room-id" class="room-id"></span></p>
+                    <button id="copy-room-id" class="btn btn-small">複製 ID</button>
+                </div>
+                
+                <div class="players-list">
+                    <h3>玩家列表</h3>
+                    <div id="players-waiting"></div>
+                </div>
+
+                <div class="waiting-actions">
+                    <button id="start-game-btn" class="btn btn-primary">開始遊戲</button>
+                    <button id="leave-room-btn" class="btn btn-secondary">離開房間</button>
+                </div>
+                <p class="info-text">需要至少 2 位玩家才能開始遊戲</p>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            <div class="game-container">
+                <div class="game-header">
+                    <h2>達文西密碼</h2>
+                    <div id="current-turn" class="turn-indicator"></div>
+                    <button id="exit-game-btn" class="btn btn-small">離開遊戲</button>
+                </div>
+
+                <div class="game-board">
+                    <!-- Opponents Section -->
+                    <div id="opponents-area" class="opponents-area"></div>
+
+                    <!-- Center Area -->
+                    <div class="center-area">
+                        <div class="tile-deck">
+                            <h3>剩餘牌堆</h3>
+                            <div id="deck-info">
+                                <div class="deck-pile">
+                                    <span class="tile-count black">黑: <span id="black-deck-count">12</span></span>
+                                    <span class="tile-count white">白: <span id="white-deck-count">12</span></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="game-messages" class="game-messages"></div>
+                    </div>
+
+                    <!-- Player's Hand -->
+                    <div class="player-area">
+                        <h3>你的牌</h3>
+                        <div id="player-hand" class="hand"></div>
+                    </div>
+                </div>
+
+                <!-- Guess Modal -->
+                <div id="guess-modal" class="modal">
+                    <div class="modal-content">
+                        <h3>猜測對手的牌</h3>
+                        <p>選擇的牌: <span id="selected-tile-info"></span></p>
+                        <div class="guess-input">
+                            <label>猜測的數字 (0-11):</label>
+                            <input type="number" id="guess-number" min="0" max="11">
+                        </div>
+                        <div class="modal-actions">
+                            <button id="confirm-guess-btn" class="btn btn-primary">確認</button>
+                            <button id="cancel-guess-btn" class="btn btn-secondary">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="gameover-screen" class="screen">
+            <div class="container">
+                <h2>遊戲結束</h2>
+                <div id="winner-announcement" class="winner-info"></div>
+                <div id="final-standings" class="standings"></div>
+                <div class="gameover-actions">
+                    <button id="back-to-lobby-btn" class="btn btn-primary">返回大廳</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/peerjs@1.5.1/dist/peerjs.min.js"></script>
+    <script src="game.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

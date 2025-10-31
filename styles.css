@@ -1,0 +1,615 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', 'Microsoft JhengHei', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+.screen {
+    display: none;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.screen.active {
+    display: block;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    text-align: center;
+    color: #667eea;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+}
+
+h2 {
+    text-align: center;
+    color: #667eea;
+    margin-bottom: 20px;
+}
+
+h3 {
+    color: #764ba2;
+    margin-bottom: 15px;
+}
+
+/* Lobby Screen */
+.lobby-content {
+    margin-bottom: 30px;
+}
+
+.player-info {
+    margin-bottom: 30px;
+}
+
+.player-info label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.player-info input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.lobby-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.join-room {
+    display: flex;
+    gap: 10px;
+}
+
+.join-room input {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background: #667eea;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #5568d3;
+}
+
+.btn-secondary {
+    background: #764ba2;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #653a8a;
+}
+
+.btn-small {
+    padding: 8px 16px;
+    font-size: 14px;
+}
+
+.btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.status-message {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.status-message.error {
+    background: #fee;
+    color: #c33;
+}
+
+.status-message.success {
+    background: #efe;
+    color: #3c3;
+}
+
+.status-message.info {
+    background: #eef;
+    color: #33c;
+}
+
+.rules-section {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.rules-section ul {
+    margin-left: 20px;
+    line-height: 1.8;
+}
+
+/* Waiting Room */
+.room-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.room-id {
+    font-family: 'Courier New', monospace;
+    font-size: 20px;
+    font-weight: bold;
+    color: #667eea;
+    padding: 5px 10px;
+    background: white;
+    border-radius: 5px;
+}
+
+.players-list {
+    margin: 30px 0;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    min-height: 150px;
+}
+
+.player-item {
+    padding: 12px;
+    margin: 8px 0;
+    background: white;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.player-item.host {
+    border-left: 4px solid #667eea;
+}
+
+.player-badge {
+    padding: 4px 8px;
+    background: #667eea;
+    color: white;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.waiting-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.waiting-actions button {
+    flex: 1;
+}
+
+.info-text {
+    text-align: center;
+    margin-top: 15px;
+    color: #666;
+    font-style: italic;
+}
+
+/* Game Screen */
+.game-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.turn-indicator {
+    padding: 10px 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.turn-indicator.active {
+    background: #4caf50;
+    color: white;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.game-board {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.opponents-area {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.opponent {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.opponent-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.opponent-name {
+    font-size: 20px;
+    font-weight: bold;
+    color: #667eea;
+}
+
+.opponent.eliminated .opponent-name {
+    color: #999;
+    text-decoration: line-through;
+}
+
+.opponent-status {
+    padding: 5px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.opponent-status.alive {
+    background: #4caf50;
+    color: white;
+}
+
+.opponent-status.eliminated {
+    background: #f44336;
+    color: white;
+}
+
+.hand {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    min-height: 80px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.tile {
+    width: 60px;
+    height: 80px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.tile.black {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    color: white;
+}
+
+.tile.white {
+    background: linear-gradient(135deg, #ecf0f1, #bdc3c7);
+    color: #2c3e50;
+}
+
+.tile.hidden {
+    background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+    color: #fff;
+}
+
+.tile.hidden::after {
+    content: '?';
+    font-size: 36px;
+}
+
+.tile.revealed {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.tile.selectable:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.tile.selected {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.8);
+}
+
+.tile-number {
+    font-size: 28px;
+}
+
+.tile-color-label {
+    font-size: 10px;
+    margin-top: 5px;
+}
+
+.center-area {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.tile-deck {
+    margin-bottom: 20px;
+}
+
+.deck-pile {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.tile-count {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.tile-count.black {
+    background: #2c3e50;
+    color: white;
+}
+
+.tile-count.white {
+    background: #ecf0f1;
+    color: #2c3e50;
+}
+
+.game-messages {
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.game-message {
+    padding: 8px 12px;
+    margin: 5px 0;
+    border-radius: 5px;
+    background: white;
+    border-left: 4px solid #667eea;
+}
+
+.game-message.error {
+    border-left-color: #f44336;
+    background: #ffebee;
+}
+
+.game-message.success {
+    border-left-color: #4caf50;
+    background: #e8f5e9;
+}
+
+.player-area {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.modal-content h3 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.guess-input {
+    margin: 20px 0;
+}
+
+.guess-input label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.guess-input input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 18px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.modal-actions button {
+    flex: 1;
+}
+
+#selected-tile-info {
+    font-weight: bold;
+    color: #667eea;
+}
+
+/* Game Over Screen */
+.winner-info {
+    text-align: center;
+    padding: 30px;
+    margin: 20px 0;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border-radius: 15px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.standings {
+    margin: 20px 0;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.standing-item {
+    padding: 15px;
+    margin: 10px 0;
+    background: white;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.standing-rank {
+    font-size: 24px;
+    font-weight: bold;
+    color: #667eea;
+    width: 40px;
+}
+
+.standing-name {
+    flex: 1;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.standing-tiles {
+    color: #666;
+}
+
+.gameover-actions {
+    margin-top: 30px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    .game-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .waiting-actions {
+        flex-direction: column;
+    }
+
+    .join-room {
+        flex-direction: column;
+    }
+
+    .tile {
+        width: 50px;
+        height: 70px;
+        font-size: 20px;
+    }
+
+    .deck-pile {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
