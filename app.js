@@ -64,7 +64,7 @@ class DaVinciApp {
 
         this.peer.on('open', (id) => {
             this.peerId = id;
-            this.roomId = id.substring(0, 8).toUpperCase();
+            this.roomId = id; // Use full peer ID as room ID
             this.localPlayerId = 0;
             
             this.players = [{
@@ -93,7 +93,7 @@ class DaVinciApp {
         const nameInput = document.getElementById('player-name');
         const roomInput = document.getElementById('room-id-input');
         const playerName = nameInput.value.trim();
-        const roomId = roomInput.value.trim().toUpperCase();
+        const roomId = roomInput.value.trim(); // Don't uppercase - use exact peer ID
 
         if (!playerName) {
             this.showStatus('請輸入你的名字', 'error');
@@ -117,9 +117,8 @@ class DaVinciApp {
         this.peer.on('open', (id) => {
             this.peerId = id;
             
-            // Connect to host (we'll reconstruct the full peer ID)
-            const hostPeerId = this.reconstructPeerId(roomId);
-            const conn = this.peer.connect(hostPeerId);
+            // Connect to host using the full peer ID
+            const conn = this.peer.connect(roomId);
 
             conn.on('open', () => {
                 // Send join request
@@ -151,12 +150,6 @@ class DaVinciApp {
             console.error('Peer error:', err);
             this.showStatus('連線錯誤: ' + err.type, 'error');
         });
-    }
-
-    reconstructPeerId(shortId) {
-        // This is a simplified reconstruction - in reality, you'd need to store the full peer ID
-        // For this demo, we'll try to use the short ID as-is and hope PeerJS can resolve it
-        return shortId.toLowerCase();
     }
 
     handleIncomingConnection(conn) {
