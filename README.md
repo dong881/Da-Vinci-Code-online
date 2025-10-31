@@ -31,7 +31,9 @@
 
 ### 線上遊玩
 
-訪問 GitHub Pages 部署的網站：`https://dong881.github.io/Da-Vinci-Code-online/`
+訪問 GitHub Pages 部署的網站：`https://<your-username>.github.io/Da-Vinci-Code-online/`
+
+(將 `<your-username>` 替換為你的 GitHub 用戶名)
 
 ### 本地運行
 

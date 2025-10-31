@@ -329,8 +329,8 @@ class DaVinciApp {
         }));
         this.game.currentPlayerIndex = gameState.currentPlayerIndex;
         this.game.gameState = gameState.gameState;
-        this.game.deck.black = gameState.deckCounts.black;
-        this.game.deck.white = gameState.deckCounts.white;
+        // Note: We only store deck counts, not the actual deck arrays since clients don't need full deck state
+        this.game.deckCounts = gameState.deckCounts;
 
         this.showScreen('game-screen');
         this.renderGame();
